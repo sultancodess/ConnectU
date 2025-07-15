@@ -1,6 +1,6 @@
-# 🎓 Alumni Association Platform  
+# ConnectU
 
-🚀 **Alumni Association Platform** is a web-based solution designed to **connect alumni, students, and faculty** of an institution. Built using the **MERN stack**, it enables alumni to stay engaged, share experiences, and contribute to the growth of the institution through networking, events, and mentorship programs.  
+🚀 **ConnectU** is a web-based solution designed to **connect alumni, students, and faculty** of an institution. Built using the **MERN stack**, it enables alumni to stay engaged, share experiences, and contribute to the growth of the institution through networking, events, and mentorship programs.  
 
 ---
 
@@ -36,32 +36,3 @@
 🔹 **Real-Time Features:** WebSockets  
 
 ---
-
-## 🚀 Live Demo  
-
-🔗 **[Alumni Platform Live](#)** _(Add live link when available)_  
-
-### 🎓 Demo Credentials  
-
-To explore the platform, use the following demo login details:  
-
-🧑‍🎓 **Alumni Account:**  
-- **Username:** `alumni_demo`  
-- **Password:** `password123`  
-
-For **Admin or Student access**, please contact me.  
-
----
-
-## 📂 Project Repository  
-
-🔗 **[GitHub Repository](#)** _(Add repository link when available)_  
-
----
-
-## 📌 Installation & Setup  
-
-### 1️⃣ Clone the Repository  
-```sh
-git clone <repository-link>
-cd alumni-platform
