@@ -1,34 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useContext } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import Home from './pages/Home'
+import Signup from './pages/Signup'
+import Login from './pages/Login'
+import { userDataContext } from './context/userContext'
+import Network from './pages/Network'
+import Profile from './pages/Profile'
+import Notification from './pages/Notification'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  let {userData}=useContext(userDataContext)
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+   <Routes>
+    <Route path='/' element={userData?<Home/>:<Navigate to="/login"/>}/>
+    <Route path='/signup' element={userData?<Navigate to="/"/>:<Signup/>}/>
+    <Route path='/login' element={userData?<Navigate to="/"/>:<Login/>}/>
+    <Route path='/network' element={userData?<Network/>:<Navigate to="/login"/>}/>
+    <Route path='/profile' element={userData?<Profile/>:<Navigate to="/login"/>}/>
+    <Route path='/notification' element={userData?<Notification/>:<Navigate to="/login"/>}/>
+  
+   </Routes>
   )
 }
 
