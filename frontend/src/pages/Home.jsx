@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import Nav from '../components/Nav'
+import UserDashboard from '../components/UserDashboard'
 import dp from "../assets/dp.webp"
 import { FiPlus } from "react-icons/fi";
 import { FiCamera } from "react-icons/fi";
@@ -130,6 +131,13 @@ getPost()
  
 
        <div className=' w-full lg:w-[50%] min-h-[200px] bg-bg-[#f0efe7] flex flex-col gap-[20px]'>
+        {/* User Dashboard - Show only on first visit or when no posts */}
+        {postData.length === 0 && (
+          <div className="mb-6">
+            <UserDashboard />
+          </div>
+        )}
+        
         <div className='w-full h-[120px] bg-white shadow-lg rounded-lg flex items-center p-[20px]  justify-center gap-[10px]'>
         <div className='w-[70px] h-[70px] rounded-full overflow-hidden flex items-center justify-center  cursor-pointer' >
             <img src={userData.profileImage || dp} alt="" className='h-full'/>

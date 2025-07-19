@@ -63,7 +63,12 @@ const userSchema=new mongoose.Schema({
        { type:mongoose.Schema.Types.ObjectId,
         ref:"User"
        }
-    ]
+    ],
+    role:{
+        type:String,
+        enum:["student","alumni","admin"],
+        default:"student"
+    }
 
 },{timestamps:true})
 

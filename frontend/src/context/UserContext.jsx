@@ -22,13 +22,20 @@ const getCurrentUser=async ()=>{
     }
 }
 
-const getPost=async ()=>{
+const getPost=async (category = 'all', page = 1)=>{
   try {
     let result=await axios.get(serverUrl+"/api/post/getpost",{
+      params: { category, page },
       withCredentials:true
     })
     console.log(result)
-    setPostData(result.data)
+    // Handle new API response format
+    if (result.data.posts) {
+      setPostData(result.data.posts)
+    } else {
+      // Fallback for old format
+      setPostData(result.data)
+    }
    
   } catch (error) {
     console.log(error)

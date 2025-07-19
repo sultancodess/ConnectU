@@ -1,39 +1,77 @@
-import Post from "../models/Post.model.js"
+import Post from "../models/post.model.js"
 import uploadOnCloudinary from "../config/cloudinary.js"
 import { io } from "../index.js";
 import Notification from "../models/notification.model.js";
 export const createPost=async (req,res)=>{
     try {
-        let {description}=req.body
+        let {description, category = "general", tags = []} = req.body
         let newPost;
-    if(req.file){
-        let image=await uploadOnCloudinary(req.file.path)
-         newPost=await Post.create({
-            author:req.userId,
-            description,
-            image
-        })
-    }else{
-        newPost=await Post.create({
-            author:req.userId,
-            description
-        })
-    }
-return res.status(201).json(newPost)
+        
+        // Parse tags if it's a string
+        if (typeof tags === 'string') {
+            tags = JSON.parse(tags);
+        }
+        
+        if(req.file){
+            let image=await uploadOnCloudinary(req.file.path)
+            newPost=await Post.create({
+                author:req.userId,
+                description,
+                image,
+                category,
+                tags
+            })
+        }else{
+            newPost=await Post.create({
+                author:req.userId,
+                description,
+                category,
+                tags
+            })
+        }
+        
+        // Populate the new post before returning
+        newPost = await Post.findById(newPost._id)
+            .populate("author","firstName lastName profileImage headline userName")
+            .populate("tags","firstName lastName profileImage userName")
+            
+        return res.status(201).json(newPost)
 
     } catch (error) {
-        return res.status(201).json(`create post error ${error}`)
+        return res.status(500).json(`create post error ${error}`)
     }
 }
 
 
 export const getPost=async (req,res)=>{
     try {
-        const post=await Post.find()
-        .populate("author","firstName lastName profileImage headline userName")
-        .populate("comment.user","firstName lastName profileImage headline")
-        .sort({createdAt:-1})
-        return res.status(200).json(post)
+        const { category, page = 1, limit = 10 } = req.query;
+        
+        // Build filter object
+        let filter = {};
+        if (category && category !== 'all') {
+            filter.category = category;
+        }
+        
+        const posts = await Post.find(filter)
+            .populate("author","firstName lastName profileImage headline userName")
+            .populate("tags","firstName lastName profileImage userName")
+            .populate("comment.user","firstName lastName profileImage headline")
+            .sort({createdAt:-1})
+            .limit(limit * 1)
+            .skip((page - 1) * limit);
+            
+        const totalPosts = await Post.countDocuments(filter);
+        
+        return res.status(200).json({
+            posts,
+            pagination: {
+                currentPage: parseInt(page),
+                totalPages: Math.ceil(totalPosts / limit),
+                totalPosts,
+                hasMore: page * limit < totalPosts
+            }
+        });
     } catch (error) {
         return res.status(500).json({message:"getPost error"})
     }

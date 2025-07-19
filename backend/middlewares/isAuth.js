@@ -3,21 +3,47 @@ import dotenv from "dotenv"
 dotenv.config()
 const isAuth=async (req,res,next)=>{
     try {
-        let {token}=req.cookies
+        // Check for token in cookies (try both 'jwt' and 'token')
+        let token = req.cookies.jwt || req.cookies.token;
 
         if(!token){
-            return res.status(400).json({message:"user doesn't have token"})
-        }
-        let verifyToken= jwt.verify(token,process.env.JWT_SECRET)
-        if(!verifyToken){
-            return res.status(400).json({message:"user doesn't have valid token"})
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized - No token provided"
+            });
         }
         
-        req.userId=verifyToken.userId
-        next()
+        let verifyToken = jwt.verify(token, process.env.JWT_SECRET);
+        if(!verifyToken){
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized - Invalid token"
+            });
+        }
+        
+        req.userId = verifyToken.userId;
+        next();
     } catch (error) {
-        console.log(error)
-        return res.status(500).json({message:"is auth error"})
+        console.error("Auth middleware error:", error.message);
+        
+        if (error.name === 'JsonWebTokenError') {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized - Invalid token"
+            });
+        }
+        
+        if (error.name === 'TokenExpiredError') {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized - Token expired"
+            });
+        }
+        
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
     }
 }
 
