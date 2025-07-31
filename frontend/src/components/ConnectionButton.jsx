@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { authDataContext } from '../context/AuthContext'
 import axios from 'axios'
 import io from "socket.io-client"
-import { userDataContext } from '../context/userContext'
+import { userDataContext } from '../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 import { IoChatbubbleEllipsesOutline } from "react-icons/io5"
 const socket=io("http://localhost:8000")

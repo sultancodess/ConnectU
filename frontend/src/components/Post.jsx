@@ -5,7 +5,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
 import axios from 'axios';
 import { authDataContext } from '../context/AuthContext';
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 import { BiSolidLike } from "react-icons/bi";
 import { LuSendHorizontal } from "react-icons/lu";
 import {io} from "socket.io-client"

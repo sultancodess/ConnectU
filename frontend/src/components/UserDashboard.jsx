@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 import { useSocket } from '../context/SocketContext';
 
 const UserDashboard = () => {

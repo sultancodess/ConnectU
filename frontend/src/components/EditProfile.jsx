@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import { RxCross1 } from "react-icons/rx";
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 import dp from "../assets/dp.webp"
 import { FiPlus } from "react-icons/fi";
 import { FiCamera } from "react-icons/fi";

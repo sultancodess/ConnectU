@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import RazorpayButton from './RazorpayButton';
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 
 const DonationModal = ({ campaign, isOpen, onClose, onSuccess }) => {
     const { userData } = useContext(userDataContext);

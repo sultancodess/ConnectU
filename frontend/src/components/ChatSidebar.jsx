@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import { useSocket } from '../context/SocketContext';
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 
 const ChatSidebar = ({ selectedChat, onChatSelect, onClose }) => {
     const [chats, setChats] = useState([]);
