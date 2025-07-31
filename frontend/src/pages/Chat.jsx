@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import Nav from '../components/Nav';
 import ChatSidebar from '../components/ChatSidebar';
 import ChatWindow from '../components/ChatWindow';
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 import { useSocket } from '../context/SocketContext';
 import axios from 'axios';
 
