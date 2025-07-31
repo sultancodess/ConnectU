@@ -3,7 +3,7 @@ import Nav from '../components/Nav'
 import dp from "../assets/dp.webp"
 import { FiPlus } from "react-icons/fi";
 import { FiCamera } from "react-icons/fi";
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 import { HiPencil } from "react-icons/hi2";
 import { authDataContext } from '../context/AuthContext';
 import axios from 'axios';

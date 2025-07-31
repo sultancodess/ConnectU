@@ -4,7 +4,7 @@ import UserDashboard from '../components/UserDashboard'
 import dp from "../assets/dp.webp"
 import { FiPlus } from "react-icons/fi";
 import { FiCamera } from "react-icons/fi";
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 import { HiPencil } from "react-icons/hi2";
 import EditProfile from '../components/EditProfile';
 import { RxCross1 } from "react-icons/rx";
