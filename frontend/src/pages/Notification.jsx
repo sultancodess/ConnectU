@@ -4,7 +4,7 @@ import { authDataContext } from '../context/AuthContext'
 import axios from 'axios'
 import { RxCross1 } from "react-icons/rx";
 import dp from "../assets/dp.webp"
-import { userDataContext } from '../context/userContext';
+import { userDataContext } from '../context/UserContext';
 function Notification() {
 
 let {serverUrl}=useContext(authDataContext)
